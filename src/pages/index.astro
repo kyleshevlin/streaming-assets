@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const LINKS = [{ href: '/banner', text: 'Banner' }]
+---
+
+<Layout title="Kyle Shevlin's Streaming Assets">
+  <div class="flex flex-col gap-8 p-8">
+    <p>
+      You can use a browser window as an input for OBS, so this is where I'll
+      make all the screens that I might use for that purpose.
+    </p>
+
+    <nav>
+      <ul>
+        {
+          LINKS.map(link => (
+            <li>
+              <a
+                class="text-pink-500 underline transition-colors hover:bg-pink-500 hover:text-white"
+                href={link.href}
+              >
+                {link.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</Layout>

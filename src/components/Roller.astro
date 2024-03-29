@@ -1,0 +1,37 @@
+---
+type Props = {
+  items: string[]
+}
+
+const { items } = Astro.props
+const longestItem = items.toSorted((a, b) => b.length - a.length).at(0)
+---
+
+<div class="relative overflow-hidden text-center">
+  <!-- This is a placeholder to establish width -->
+  <div class="opacity-0">{longestItem}</div>
+
+  {
+    items.map(item => (
+      <div class="roller-item absolute left-0 top-0 w-full translate-y-full opacity-0 transition-all duration-1000">
+        {item}
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  const INTERVAL = 7000
+  const items = [...document.querySelectorAll('.roller-item')] as HTMLElement[]
+  let idx = 0
+  let currentItem = items[idx]
+
+  currentItem.classList.remove('opacity-0', 'translate-y-full')
+
+  setInterval(() => {
+    idx = (idx + 1) % items.length
+    currentItem.classList.add('opacity-0', 'translate-y-full')
+    currentItem = items[idx]
+    currentItem.classList.remove('opacity-0', 'translate-y-full')
+  }, INTERVAL)
+</script>
